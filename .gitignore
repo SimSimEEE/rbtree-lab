@@ -4,6 +4,8 @@
 .LSOverride
 ._*
 
+.vscode
+
 # Prerequisites
 *.d
 

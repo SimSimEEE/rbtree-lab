@@ -1,14 +1,15 @@
 #include <assert.h>
-#include <rbtree.h>
+#include "rbtree.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+#define SENTINEL
 
 // new_rbtree should return rbtree struct with null root node
 void test_init(void) {
   rbtree *t = new_rbtree();
   assert(t != NULL);
-  printf("%lld %lld\n", (long long)t->root, (long long) t->nil);
 #ifdef SENTINEL
   assert(t->nil != NULL);
   assert(t->root == t->nil);
@@ -370,25 +371,15 @@ void test_find_erase_rand(const size_t n, const unsigned int seed) {
 
 int main(void) {
   test_init();
-  printf("test_init\n");
   test_insert_single(1024);
-  printf("test_insert_single\n");
   test_find_single(512, 1024);
-  printf("test_find_single\n");
   test_erase_root(128);
-  printf("test_erase_root\n");
   test_find_erase_fixed();
-  printf("test_find_erase_fixed\n");
   test_minmax_suite();
-  printf("test_minmax_suite\n");
   test_to_array_suite();
-  printf("test_to_array_suite\n");
   test_distinct_values();
-  printf("test_distinct_values\n");
   test_duplicate_values();
-  printf("test_duplicate_values\n");
   test_multi_instance();
-  printf("test_multi_instance\n");
   test_find_erase_rand(10000, 17);
   printf("Passed all tests!\n");
 }
